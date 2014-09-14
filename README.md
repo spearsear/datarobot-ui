@@ -40,7 +40,7 @@ Design:
    
 6: Used karma jasmine for unit test by mocking scope and http response
 
-Challenges:
+Some notes:
 
 1: data api example: http://www.seismi.org/api/eqs/2013/07?min_magnitude=1
 
