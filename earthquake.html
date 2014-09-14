@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html ng-app="earthquakeApp">
+<head>
+  <title>Earthquake Activity</title>
+  <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+  <script src="/js/angular.js"></script>
+  <script src="/js/angular-resource.js"></script>
+  <script src="/js/d3service.js"></script>
+  <script src="/js/seismigraph.js"></script>
+  <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="/css/bootstrap-theme.css" rel="stylesheet">
+  <style>
+    path {
+      stroke: white;
+      stroke-width: 0.25px;
+      fill: grey;
+    }
+    input[type='range'] {
+      width:300px;
+    }
+    select.selector {
+      margin-left: 15px;
+    }
+    svg {
+      border-style: solid;
+      border-width: 1px;
+      border-color: lightgrey;
+    }
+    .ring {
+      fill: none;
+      stroke-width: .5px;
+    }
+  </style>
+  <script type="text/ng-template" id="selectorsTemplate">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	Select year and/or month, filter by magnitude:
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+	  <select class="selector" ng-model="selector.year" ng-options="year for year in [2010,2011,2012,2013]"></select>
+	  <select class="selector" ng-model="selector.month" ng-options="month for month in [1,2,3,4,5,6,7,8,9,10,11,12]"></select>
+        </div>
+        <div class="col-xs-6">
+          selected magnitude: {{magnitude | magnitude_level }}
+          <input ng-model="magnitude" type="range" name="magnitude" min="-1" max="9">
+        </div>
+      </div>
+    </div>
+  </script>
+</head>
+<body>
+<div class="panel-heading">
+<h3>Earthquake Seimigraph</h3>
+</div>
+<div ng-controller="seismiCtrl">
+  <d3-seismi data="data.earthquakes" 
+	     selector="selector"
+             magnitude="magnitude"
+             dthree="d3"
+             getdata="getData(selector.year,selector.month)">
+  </d3-seismi>
+  <div ng-hide="true">
+    <table class="table table-striped table-bordered">
+      <tr><th>src</th><th>eqid</th><th>timedate</th><th>magnitude</th></tr>
+      <tr ng-repeat="quake in data.earthquakes">
+         <td>{{quake.src}}</td>
+         <td>{{quake.eqid}}</td>
+         <td>{{quake.timedate}}</td>
+         <td>{{quake.magnitude}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>
