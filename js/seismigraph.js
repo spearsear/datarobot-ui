@@ -16,11 +16,15 @@
       $scope.magnitude = -1;
       $scope.d3 = {};
       $scope.convertToDate = function(str){return new Date(str)};
+      $scope.zeroPad = function(num, size) {
+        var s = "000000000" + num;
+        return s.substr(s.length-size);
+      }
       $scope.getData = function(year,month){
         if(!angular.isUndefined(year) && !angular.isUndefined(month)){
           $http({
             //No 'Access-Control-Allow-Origin' header is present on the requested resource
-            //url: baseUrl+'eqs/'+year+'/'+month+'?min_magnitude=1'
+            //url: baseUrl+'eqs/'+year+'/'+$scope.zeroPad(month,2)+'?min_magnitude=1'
             url: '/json/earthquakes_'+year+'_'+month+'.json'
             //url: 'http://api.openweathermap.org/data/2.5/weather?q=London,uk'
           }).success(function(data){
