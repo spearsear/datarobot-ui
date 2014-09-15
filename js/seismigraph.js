@@ -286,6 +286,11 @@
                      });
                    });
                 };
+
+                scope.svg.select("g")
+                   .selectAll("circle")
+                   .data(data).exit().remove();
+
             }//end render EarthQuake function
 
             //useful for unit test
