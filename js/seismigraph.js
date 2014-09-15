@@ -185,7 +185,7 @@
 		     .attr("r", 0)
 		     .ease('sine');
                   setIntervalEnhanced(function(){
-			 scope.svg.append("circle")
+			 scope.svg.select("g").append("circle")
 			      .attr("class", "ring")
                               .attr("transform","translate("+thecircle.attr("cx")+","+thecircle.attr("cy")+")")
 			      .attr("r", 6)
