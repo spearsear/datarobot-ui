@@ -291,7 +291,7 @@
                    .selectAll("circle")
                    .data(data).exit().remove();
 
-            }//end render EarthQuake function
+            }//end render Earthquake function
 
             //useful for unit test
             if(d3_global || scope.dthree){
